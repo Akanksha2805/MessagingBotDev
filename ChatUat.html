@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Messaging Test</title>
+</head>
+<body>
+    <h1>Embedded Messaging Test</h1>
+    <script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+			embeddedservice_bootstrap.init(
+				'00DEa000000Urje',
+				'Messaging_Clearstreet_Active',
+				'https://clearstreet--ibsand.sandbox.my.site.com/ESWMessagingClearstreet1725459293804',
+				{
+					scrt2URL: 'https://clearstreet--ibsand.sandbox.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://clearstreet--ibsand.sandbox.my.site.com/ESWMessagingClearstreet1725459293804/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+</body>
+</html>
