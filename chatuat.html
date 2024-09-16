@@ -31,6 +31,16 @@
 			console.error('Error loading Embedded Messaging: ', err);
 		}
 	};
+	           // Load the external script
+        (function() {
+            var script = document.createElement('script');
+            script.src = 'https://clearstreet--ibsand.sandbox.my.site.com/ESWMessagingClearstreet1725459293804/assets/js/bootstrap.min.js';
+            script.onload = initEmbeddedMessaging;
+            script.onerror = function() {
+                console.error('Error loading the external script.');
+            };
+            document.head.appendChild(script);
+        })();
 </script>
 <script type='text/javascript' src='https://clearstreet--ibsand.sandbox.my.site.com/ESWMessagingClearstreet1725459293804/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
