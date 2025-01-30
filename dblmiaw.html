@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embedded Messaging Test UAT </title>
+    <title>Embedded Messaging Test UAT DBL</title>
 </head>
 <body>
     <h1>Embedded Messaging Test UAT NEW</h1>
     <script type='text/javascript'>
 	function initEmbeddedMessaging() {
-		try {
-			console.log('inside func1');
-			 console.log('inside func');
-                	if (typeof embeddedservice_bootstrap !== 'undefined') {
-			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-
-			embeddedservice_bootstrap.init(
-				'00DEa000000Urje',
-				'Messaging_Clearstreet_Active',
-				'https://clearstreet--ibsand.sandbox.my.site.com/ESWMessagingClearstreet1725459293804',
-				{
-					scrt2URL: 'https://clearstreet--ibsand.sandbox.my.salesforce-scrt.com'
-				}
-			);
-				
-		 } else {
-				 console.error('embeddedservice_bootstrap is not defined.');
-                } 
-			} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
+      try {
+        embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+        window.addEventListener("onEmbeddedMessagingReady", () => {
+          embeddedservice_bootstrap.settings.omitSandbox = true;
+          // Send data to Salesforce
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+            "Fulfillment_Id" : "32137915",
+            "FirstName" : "Fedor",
+            "LastName" : "Garin",
+            "Email" : "fgarin2@bloomberg.net"
+          });
+        });
+        embeddedservice_bootstrap.init(
+          '00D6C0000009z7X',
+          'Messaging_DBL_Support2',
+          'https://bloombergindustry--uat.sandbox.my.site.com/ESWMessagingDBLSupport21738070569116',
+          {
+            scrt2URL: 'https://bloombergindustry--uat.sandbox.my.salesforce-scrt.com'
+          }
+        );
+      } catch (err) {
+        console.error('Error loading Embedded Messaging: ', err);
+      }
+    };
 	           // Load the external script
         (function() {
             var script = document.createElement('script');
