@@ -3,39 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embedded Messaging Test UAT </title>
-</head>
-<body>
-    <h1>Embedded Messaging Test UAT NEW</h1>
-    <script type="text/javascript" nonce="">
-    function initEmbeddedMessaging() {
-      try {
-        embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-        window.addEventListener("onEmbeddedMessagingReady", () => {
-          embeddedservice_bootstrap.settings.omitSandbox = true;
-          // Send data to Salesforce
-          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-            "Fulfillment_Id" : "32137915",
-            "FirstName" : "Fedor",
-            "LastName" : "Garin",
-            "Email" : "fgarin2@bloomberg.net"
-          });
-        });
-        embeddedservice_bootstrap.init(
-          '00D6C0000009z7X',
-          'Messaging_DBL_Support2',
-          'https://bloombergindustry--uat.sandbox.my.site.com/ESWMessagingDBLSupport21738070569116',
-          {
-            scrt2URL: 'https://bloombergindustry--uat.sandbox.my.salesforce-scrt.com'
-          }
-        );
-      } catch (err) {
-        console.error('Error loading Embedded Messaging: ', err);
-      }
-    };
-    initEmbeddedMessaging();
-  </script>
+    <title>Embedded Messaging Test UAT</title>
 
+    <!-- Ensure the Salesforce Embedded Messaging JS library is included -->
+    <script type="text/javascript" src="https://bloombergindustry--uat.sandbox.my.salesforce.com/embeddedservice/embeddedservice.js"></script>
 
-</body>
-</html>
+    <script type="text/javascript">
+        // Initialize the Embedded Messaging when the page is fully loaded
+        window.onload = function() {
+            initEmbeddedMessaging();
+        };
+
+        function initEmbeddedMessaging() {
+            try {
+                // Ensure embeddedservice_bootstrap is loaded
+                if (typeof embeddedservice_bootstrap === "undefined") {
+                    console.error('embeddedservice_bootstrap is not defined');
+                    return;
+                }
+
+                // Set language and configuration
+                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, 'en' or 'en-US'
+                
+                // Set pre-chat fields when the embedded messaging is ready
+                window.addEventListener("onEmbeddedMessagingReady", () => {
+                    embeddedservice_bootstrap.settings.omitSandbox = true;
+                    // Send data to Salesforce
+                    embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+                        "Fulfillment_Id" : "32137915",
+                        "FirstName" : "Fedor",
+                        "LastName" : "Garin",
+                        "Email" : "fgarin2@bloomberg.net"
+                    });
+                });
+
+                // Initialize embedded messaging with necessary configuration
+                embeddedservice_bootstrap.init(
+                    '00D6C0000009z7X',  // Salesforce Org ID
+                    'Messaging_DBL_Support2',  // Embedded service name
+   
