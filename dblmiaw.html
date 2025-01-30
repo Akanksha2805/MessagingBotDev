@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Messaging Test UAT </title>
+</head>
+<body>
+    <h1>Embedded Messaging Test UAT NEW</h1>
+    <script type="text/javascript" nonce="">
+    function initEmbeddedMessaging() {
+      try {
+        embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+        window.addEventListener("onEmbeddedMessagingReady", () => {
+          embeddedservice_bootstrap.settings.omitSandbox = true;
+          // Send data to Salesforce
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+            "Fulfillment_Id" : "32137915",
+            "FirstName" : "Fedor",
+            "LastName" : "Garin",
+            "Email" : "fgarin2@bloomberg.net"
+          });
+        });
+        embeddedservice_bootstrap.init(
+          '00D6C0000009z7X',
+          'Messaging_DBL_Support2',
+          'https://bloombergindustry--uat.sandbox.my.site.com/ESWMessagingDBLSupport21738070569116',
+          {
+            scrt2URL: 'https://bloombergindustry--uat.sandbox.my.salesforce-scrt.com'
+          }
+        );
+      } catch (err) {
+        console.error('Error loading Embedded Messaging: ', err);
+      }
+    };
+    initEmbeddedMessaging();
+  </script>
+
+
+</body>
+</html>
