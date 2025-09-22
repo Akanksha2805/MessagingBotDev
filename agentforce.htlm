@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Messaging Test UAT DBL</title>
+</head>
+<body>
+    <h1>Embedded Messaging Test UAT DBL h1</h1>
+    <script type='text/javascript'>
+	function initEmbeddedMessaging() {
+      try {
+        embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+        window.addEventListener("onEmbeddedMessagingReady", () => {
+          embeddedservice_bootstrap.settings.omitSandbox = true;
+          // Send data to Salesforce
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+            "Fulfillment_Id" : "32137915",
+            "FirstName" : "Fedor",
+            "LastName" : "Garin",
+            "Email" : "fgarin2@bloomberg.net"
+          });
+        });
+        embeddedservice_bootstrap.init(
+          '00DHu00000hwcJb',
+          'AT_Agentforce_MIAW',
+          'https://ai1758096472696.my.site.com/ESWATAgentforceMIAW1758457092620',
+          {
+            scrt2URL: 'https://ai1758096472696.my.salesforce-scrt.com'
+          }
+        );
+      } catch (err) {
+        console.error('Error loading Embedded Messaging: ', err);
+      }
+    };
+	           // Load the external script
+        (function() {
+            var script = document.createElement('script');
+            script.src = 'https://ai1758096472696.my.site.com/ESWATAgentforceMIAW1758457092620/assets/js/bootstrap.min.js';
+            script.onload = initEmbeddedMessaging;
+            script.onerror = function() {
+                console.error('Error loading the external script.');
+            };
+            document.head.appendChild(script);
+        })();
+</script>
+
+
+</body>
+</html>
